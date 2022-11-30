@@ -7,16 +7,22 @@
 #include <ESP8266WiFi.h>
 #include <user_interface.h>
 
+#define _IDLE 0
+#define _FINISHED 1
+#define _WAITING_TIME 2
+#define _RELOADING 3
+
 // Define global variables
-StaticJsonDocument<1024> dates;
+StaticJsonDocument<1060> dates;
 int number_of_pills = 0;
 const int NUMBER_OF_POS = 7;
 int servo_pos = 0;
 int servo_angle = 0;
 int next_pill = 1;
-int stop_main;
 const char *int_to_str = "123456789";
 const char *json_in_buffer;
+int finished = 1;
+int state = _IDLE;
 
 // pins
 int servo_pin = 4; // D2
@@ -56,6 +62,7 @@ void setup() {
   Serial.println("Wifi manager conectado");
 
   // Configure MQTT broker
+  client.setBufferSize(600); // Set max size of callback msg to 600
   client.setServer(mqtt_broker, mqtt_port);
   client.setCallback(sub_callback);
   while (!client.connected()) {
@@ -92,20 +99,21 @@ void loop() {
   servo_to_pos(servo_pos);
   btn_was_pressed(); // Need to call to update button state
 
-  if (!stop_main){
-    if (passed_next_pill_time()){
-      digitalWrite(buzzer_pin, 1);
-      if (btn_was_pressed() == 1){
-        inc_servo_pos();
-        goto_next_pill();
-      }
-    }
-    else {
-      digitalWrite(buzzer_pin, 0);
-    }
-  }
-  else{
-    digitalWrite(buzzer_pin, 0);
+  switch(state)
+  {
+    case _IDLE:
+    break;
+
+    case _FINISHED:
+      finished_state();
+    break;
+
+    case _WAITING_TIME:
+      waiting_time_state();
+    break;
+
+    case _RELOADING:
+    break;
   }
 }
 
@@ -129,6 +137,8 @@ void sub_callback(char *topic, byte *payload, unsigned int length) {
         String next_pill_char = String(next_pill);
       }
       number_of_pills = dates.as<JsonObject>().size();
+      finished = 0;
+      state = _WAITING_TIME;
     }
 
     if(strcmp(topic, debug_servo_angle_topic) == 0){
@@ -140,6 +150,26 @@ void sub_callback(char *topic, byte *payload, unsigned int length) {
     }
     Serial.println();
     Serial.println("-----------------------");
+}
+
+void waiting_time_state(){
+  if (passed_next_pill_time()){
+    digitalWrite(buzzer_pin, 1);
+    if (btn_was_pressed() == 1){
+      inc_servo_pos();
+      if(!goto_next_pill()){
+        state = _FINISHED;
+      }
+    }
+  }
+  else {
+    digitalWrite(buzzer_pin, 0);
+  }
+}
+
+void finished_state(){
+  digitalWrite(buzzer_pin, 0);
+  next_pill = 1;
 }
 
 int passed_next_pill_time() {
@@ -203,10 +233,13 @@ void inc_servo_pos(){
   }
 }
 
-void goto_next_pill(){
+int goto_next_pill(){
+  // Return 1 if has next_pill and return 0 if not
   next_pill += 1;
   if(next_pill > number_of_pills){
     next_pill = 1;
-    stop_main = 1;
+    finished = 1;
+    return 0;
   }
+  return 1;
 }

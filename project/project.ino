@@ -5,16 +5,23 @@
 #include <PubSubClient.h>
 #include <strings_en.h>
 #include <ESP8266WiFi.h>
+#include <user_interface.h>
 
 // Define global variables
 StaticJsonDocument<1024> dates;
+int number_of_pills = 0;
 const int NUMBER_OF_POS = 7;
 int servo_pos = 0;
 int servo_angle = 0;
-int servo_pin = 4; //D2
 int next_pill = 1;
+int stop_main;
 const char *int_to_str = "123456789";
 const char *json_in_buffer;
+
+// pins
+int servo_pin = 4; // D2
+int button_pin = 14; // D5
+int buzzer_pin = 12; // D6
 
 // subscribed topics
 const char *date_topic = "date/";
@@ -75,23 +82,30 @@ void setup() {
   pinMode(servo_pin, OUTPUT);
   analogWriteFreq(100);
   analogWriteRange(256);
+  pinMode(button_pin, INPUT);
+  pinMode(buzzer_pin, OUTPUT);
 }
 
 void loop() {
   client.loop();
   timeClient.update();
   servo_to_pos(servo_pos);
-  if (passed_next_pill_time()) {
-    Serial.println("Passou da hora");
-    // if (botão apertado){
-    //  Passa pro próximo remédio
-    //  Publica falando que passou  
-    // }
-    // else {
-    //  Se passar muito tempo publica falando que esqueceu
-    // }
-    //
-    //
+  btn_was_pressed(); // Need to call to update button state
+
+  if (!stop_main){
+    if (passed_next_pill_time()){
+      digitalWrite(buzzer_pin, 1);
+      if (btn_was_pressed() == 1){
+        inc_servo_pos();
+        goto_next_pill();
+      }
+    }
+    else {
+      digitalWrite(buzzer_pin, 0);
+    }
+  }
+  else{
+    digitalWrite(buzzer_pin, 0);
   }
 }
 
@@ -114,6 +128,7 @@ void sub_callback(char *topic, byte *payload, unsigned int length) {
         next_pill = 1;
         String next_pill_char = String(next_pill);
       }
+      number_of_pills = dates.as<JsonObject>().size();
     }
 
     if(strcmp(topic, debug_servo_angle_topic) == 0){
@@ -149,4 +164,49 @@ void servo_to_pos(int pos){
 
 void servo_to_angle(int angle){
   analogWrite(servo_pin, map(servo_angle, 0, 180, 9, 58));
+}
+
+int btn_is_pressed(){
+  return digitalRead(button_pin);
+}
+
+int btn_was_pressed(){
+  static int was_pressed;
+  static int was_unpressed;
+  static unsigned long unpressed_time;
+  unsigned long now = millis();
+
+  if (btn_is_pressed() == 1){
+    was_pressed = 1;
+    was_unpressed = 0;
+    unpressed_time = now;
+  }
+  else if(was_pressed == 1 && !was_unpressed) {
+    unpressed_time = now;
+    was_unpressed = 1;
+  }
+  if (was_pressed == 1 && (now - unpressed_time) > 1000){
+    was_pressed = 0;
+  }
+
+  return was_pressed;
+}
+
+void inc_servo_pos(){
+  static unsigned long inc_time;
+  if(millis() - inc_time > 3000){
+    servo_pos += 1;
+    if (servo_pos > NUMBER_OF_POS-1 ){
+      servo_pos = 0;
+    }
+    inc_time = millis();
+  }
+}
+
+void goto_next_pill(){
+  next_pill += 1;
+  if(next_pill > number_of_pills){
+    next_pill = 1;
+    stop_main = 1;
+  }
 }

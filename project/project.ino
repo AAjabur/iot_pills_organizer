@@ -13,17 +13,15 @@
 #define _RELOADING 3
 
 // Define global variables
-StaticJsonDocument<1060> dates;
-int number_of_pills = 0;
-const int NUMBER_OF_POS = 8;
-int servo_pos = 0;
-int servo_angle = 0;
-int next_pill = 1;
-int reloading_pill_n = 1;
-const char *int_to_str = "123456789";
-const char *json_in_buffer;
-int finished = 1;
-int state = _IDLE;
+StaticJsonDocument<1060> dates; // Stores the schedule to take the pills
+int number_of_pills = 0; // How many pills can be stored at the same time
+const int NUMBER_OF_POS = 8; // Number of servo positions
+int servo_pos = 0; // Current servo position, changes in this variable makes servo move
+int servo_angle = 0; // Current servo_angle, just for debug
+int next_pill = 1; // When the pill box is loaded this variable stores the number of the next pill to be taked, in chronological order
+int reloading_pill_n = 1; // When the pill box is reloading this variable represents the number of the bill being reloaded
+const char *json_in_buffer; // When JsonDocuments desirialize some string, the string needs to be alocated, so this variable stores the string
+int state = _IDLE; // Represent the current state that the pill box are
 
 // pins
 int servo_pin = 4; // D2
@@ -54,6 +52,9 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 WiFiClient espClient;
 PubSubClient client(espClient);
 
+/**
+* @brief Setup function
+*/
 void setup() {
 
   Serial.begin(115200);
@@ -100,6 +101,9 @@ void setup() {
   pinMode(buzzer_pin, OUTPUT);
 }
 
+/**
+* @brief Main loop
+*/
 void loop() {
   client.loop();
   timeClient.update();
@@ -125,6 +129,9 @@ void loop() {
   }
 }
 
+/**
+* @brief Function that is called when a topic arrive in some subscribed topic
+*/
 void sub_callback(char *topic, byte *payload, unsigned int length) {
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
@@ -143,8 +150,7 @@ void sub_callback(char *topic, byte *payload, unsigned int length) {
     else {
       next_pill = reloading_pill_n;
     }
-    number_of_pills = 6;
-    finished = 0;
+    number_of_pills = 7;
     state = _WAITING_TIME;
   }
 
@@ -171,6 +177,9 @@ void sub_callback(char *topic, byte *payload, unsigned int length) {
   Serial.println("-----------------------");
 }
 
+/**
+* @brief Routine to execute when in the waiting time state
+*/
 void waiting_time_state(){
   if (passed_next_pill_time()){
     digitalWrite(buzzer_pin, 1);
@@ -186,15 +195,27 @@ void waiting_time_state(){
   }
 }
 
+/**
+* @brief Routine to execute when in the finished state
+*/
 void finished_state(){
   digitalWrite(buzzer_pin, 0);
   next_pill = 1;
 }
 
+/**
+* @brief Routine to execute when in the reloading state
+*/
 void reloading_state(){
   servo_pos = reloading_pill_n;  
 }
 
+/**
+* @brief Compare if passed the time to take the pill represented by
+* the global variable next_pill
+*
+* @return Return 1 if the time has passed, else return 0
+*/
 int passed_next_pill_time() {
   if (!dates.isNull()){
     String next_pill_char = String(next_pill);
@@ -211,20 +232,42 @@ int passed_next_pill_time() {
   }
 }
 
+/**
+* @brief Rotate the servo to the given position
+* currently there are 8 possible positions 0-7
+*
+* @param pos: between from 0 to 7
+*/
 void servo_to_pos(int pos){
   int pos_in_angle[] = {0, 23, 42, 64, 85, 109, 132, 157};
   servo_angle = pos_in_angle[pos];
   servo_to_angle(servo_angle);
 }
 
+/**
+* @brief Rotate servo approximately to the given angle
+*
+* @param angle: angle to rotate servo, currently from 0 to 180
+*/
 void servo_to_angle(int angle){
   analogWrite(servo_pin, map(servo_angle, 0, 180, 9, 58));
 }
 
+/**
+* @brief Return the state of the button
+*
+* @return int: 1 if button is pressed, else 0
+*/
 int btn_is_pressed(){
   return digitalRead(button_pin);
 }
 
+/**
+* @brief This function return 1 for 1s after a button is pressed, after 1s without been
+* pressed, the function starts to return 0
+*
+* @return int: 1 if pressed in the last second, else 0
+*/
 int btn_was_pressed(){
   static int was_pressed;
   static int was_unpressed;
@@ -247,6 +290,10 @@ int btn_was_pressed(){
   return was_pressed;
 }
 
+/**
+* @brief Increment the global variable that represent the servo position,
+* if the position goes beyond the max number of position, reset the position
+*/
 void inc_servo_pos(){
   static unsigned long inc_time;
   if(millis() - inc_time > 3000){
@@ -258,12 +305,17 @@ void inc_servo_pos(){
   }
 }
 
+/**
+* @brief Increment the global variable that represent the next pill number,
+* if the variable goes beyond the current max number of pills, set the next pill to 1 and return 0
+*
+* @return Return 0 if number of pills goes beyond max number of pills, else return 1
+*/
 int free_next_pill(){
   // Return 1 if has next_pill and return 0 if not
   next_pill += 1;
   if(next_pill > number_of_pills){
     next_pill = 1;
-    finished = 1;
     return 0;
   }
   return 1;

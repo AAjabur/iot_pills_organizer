@@ -201,9 +201,10 @@ int passed_next_pill_time() {
     const char *today = daysOfTheWeek[timeClient.getDay()];
     const char *pill_day = dates[next_pill_char]["weekday"];
     int right_day = strcmp(pill_day, today) == 0;
-    int passed_hour = timeClient.getHours() >= dates[next_pill_char]["hour"].as<int>();
+    int passed_hour = timeClient.getHours() > dates[next_pill_char]["hour"].as<int>();
+    int right_hour = timeClient.getHours() == dates[next_pill_char]["hour"].as<int>();
     int passed_minute = timeClient.getMinutes() >= dates[next_pill_char]["minute"].as<int>();
-    return right_day && passed_hour && passed_minute;
+    return right_day && passed_hour || right_hour && passed_minute;
   }
   else{
     return 0;

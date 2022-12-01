@@ -62,7 +62,7 @@ void setup() {
 
   WiFiManager wifiManager;
   // Start Wifi Manager
-  wifiManager.autoConnect("ESP8266", "andre2000");
+  wifiManager.autoConnect("pill_box", "pill_box2022");
 
   Serial.println("Wifi manager conectado");
 

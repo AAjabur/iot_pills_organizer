@@ -19,6 +19,7 @@ const int NUMBER_OF_POS = 7;
 int servo_pos = 0;
 int servo_angle = 0;
 int next_pill = 1;
+int reloading_pill_n = 1;
 const char *int_to_str = "123456789";
 const char *json_in_buffer;
 int finished = 1;
@@ -31,8 +32,11 @@ int buzzer_pin = 12; // D6
 
 // subscribed topics
 const char *date_topic = "date/";
+const char *reloading_pill_topic = "reload/pill_number";
+const char *verification_topic = "verification/esp";
 const char *debug_servo_angle_topic = "servo/debug/angle";
 const char *debug_servo_pos_topic = "servo/debug/pos";
+const char *set_state_topic = "state/set";
 
 // MQTT Broker
 const char *mqtt_broker = "broker.hivemq.com";
@@ -81,6 +85,9 @@ void setup() {
   client.subscribe(date_topic);
   client.subscribe(debug_servo_angle_topic);
   client.subscribe(debug_servo_pos_topic);
+  client.subscribe(reloading_pill_topic);
+  client.subscribe(verification_topic);
+  client.subscribe(set_state_topic);
 
   //Start NTP Client
   timeClient.begin();
@@ -113,43 +120,55 @@ void loop() {
     break;
 
     case _RELOADING:
+      reloading_state();
     break;
   }
 }
 
 void sub_callback(char *topic, byte *payload, unsigned int length) {
-    Serial.print("Message arrived in topic: ");
-    Serial.println(topic);
-    Serial.print("Message:");
-    char msg[length];
-    memcpy(msg, payload, length); 
-    Serial.print(msg);
+  Serial.print("Message arrived in topic: ");
+  Serial.println(topic);
+  Serial.print("Message:");
+  char msg[length];
+  memcpy(msg, payload, length); 
+  Serial.print(msg);
 
-    if (strcmp(topic, date_topic) == 0){
-      json_in_buffer = msg;  
-      DeserializationError err = deserializeJson(dates, json_in_buffer);
-      if (err) {
-        Serial.print(F("deserializeJson() failed with code "));
-        Serial.println(err.f_str());
-      }
-      else {
-        next_pill = 1;
-        String next_pill_char = String(next_pill);
-      }
-      number_of_pills = dates.as<JsonObject>().size();
-      finished = 0;
-      state = _WAITING_TIME;
+  if (strcmp(topic, date_topic) == 0){
+    json_in_buffer = msg;  
+    DeserializationError err = deserializeJson(dates, json_in_buffer);
+    if (err) {
+      Serial.print(F("deserializeJson() failed with code "));
+      Serial.println(err.f_str());
     }
+    else {
+      next_pill = reloading_pill_n;
+    }
+    number_of_pills = 6;
+    finished = 0;
+    state = _WAITING_TIME;
+  }
 
-    if(strcmp(topic, debug_servo_angle_topic) == 0){
-      servo_angle = atoi(msg);
+  if(strcmp(topic, debug_servo_angle_topic) == 0){
+    servo_angle = atoi(msg);
+  }
+  if(strcmp(topic, debug_servo_pos_topic) == 0){
+    servo_pos = atoi(msg);
+  }
+  if(strcmp(topic, reloading_pill_topic) == 0){
+    reloading_pill_n = atoi(msg);
+  }
+  if(strcmp(topic, verification_topic) == 0){
+    if(atoi(msg)==0){ client.publish(verification_topic, "1"); }
+  }
+  if(strcmp(topic, set_state_topic) == 0){
+    state = atoi(msg);
+    if (state==_WAITING_TIME){
+      servo_pos = reloading_pill_n-1;
     }
+  }
 
-    if(strcmp(topic, debug_servo_pos_topic) == 0){
-      servo_pos = atoi(msg);
-    }
-    Serial.println();
-    Serial.println("-----------------------");
+  Serial.println();
+  Serial.println("-----------------------");
 }
 
 void waiting_time_state(){
@@ -157,7 +176,7 @@ void waiting_time_state(){
     digitalWrite(buzzer_pin, 1);
     if (btn_was_pressed() == 1){
       inc_servo_pos();
-      if(!goto_next_pill()){
+      if(!free_next_pill()){
         state = _FINISHED;
       }
     }
@@ -170,6 +189,10 @@ void waiting_time_state(){
 void finished_state(){
   digitalWrite(buzzer_pin, 0);
   next_pill = 1;
+}
+
+void reloading_state(){
+  servo_pos = reloading_pill_n;  
 }
 
 int passed_next_pill_time() {
@@ -233,7 +256,7 @@ void inc_servo_pos(){
   }
 }
 
-int goto_next_pill(){
+int free_next_pill(){
   // Return 1 if has next_pill and return 0 if not
   next_pill += 1;
   if(next_pill > number_of_pills){

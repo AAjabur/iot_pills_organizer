@@ -15,7 +15,7 @@
 // Define global variables
 StaticJsonDocument<1060> dates;
 int number_of_pills = 0;
-const int NUMBER_OF_POS = 7;
+const int NUMBER_OF_POS = 8;
 int servo_pos = 0;
 int servo_angle = 0;
 int next_pill = 1;
@@ -211,7 +211,8 @@ int passed_next_pill_time() {
 }
 
 void servo_to_pos(int pos){
-  servo_angle = map(pos, 0, NUMBER_OF_POS-1, 0, 180);
+  int pos_in_angle[] = {0, 23, 42, 64, 85, 109, 132, 157};
+  servo_angle = pos_in_angle[pos];
   servo_to_angle(servo_angle);
 }
 

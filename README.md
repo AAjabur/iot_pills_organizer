@@ -1,6 +1,6 @@
 # O projeto
 
-    Esse projeto tem como objetivo criar uma caixa de remédios inteligente, onde os horários de cada remédio podem ser configurados por um aplicativo de celular.
+ Esse projeto tem como objetivo criar uma caixa de remédios inteligente, onde os horários de cada remédio podem ser configurados por um aplicativo de celular.
 
  Quando chega o horário do remédio a caixa deve começar a apitar e só deve liberar o remédio e parar de apitar após ser pressionado um botão. Caso o botão não seja pressionado em até 15 minutos depois do início do apito, uma mensagem de whatsapp será enviada para o número configurado de uma pessoa.
 
@@ -22,4 +22,5 @@ Para o projeto foram utilizados os seguintes componentes:
 
 # Comportamento básico
 
+![projeto_iot drawio](https://user-images.githubusercontent.com/83726610/205179625-e0e37067-0f91-4aed-a71d-0040a9e861f9.png)
 

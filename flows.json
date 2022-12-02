@@ -1,0 +1,1060 @@
+[
+    {
+        "id": "3ea11033e0fcf8d6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "15e995525cc0e321",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "32806f981eef8e2d",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "495f62aa5d3bdc4c",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "99e945baa9ea34b1",
+        "type": "junction",
+        "z": "15e995525cc0e321",
+        "x": 520,
+        "y": 1000,
+        "wires": [
+            [
+                "2c25db7d7ff2edfa"
+            ]
+        ]
+    },
+    {
+        "id": "a7493d6a5962d329",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c8dc9f733c6ec8bd",
+        "type": "mqtt-broker",
+        "name": "HiveMQQT",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "81f5347c70e612db",
+        "type": "wakeword-config",
+        "name": "jab_rassp",
+        "files": [
+            "/home/jab_rasp/wakeword"
+        ]
+    },
+    {
+        "id": "ca01e37eded74603",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "André"
+    },
+    {
+        "id": "80b99021.9a4",
+        "type": "node-red-contrib-whatsapp-cmb-account",
+        "name": "WhatsApp API Account"
+    },
+    {
+        "id": "b58a9c631c9775fd",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "cdc337395ab2c801",
+        "type": "ui_group",
+        "name": "Pill_box",
+        "tab": "b58a9c631c9775fd",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "89aba3d9b6d8e1d2",
+        "type": "mqtt in",
+        "z": "3ea11033e0fcf8d6",
+        "name": "SUB horários marcados",
+        "topic": "date/",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "c8dc9f733c6ec8bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 300,
+        "wires": [
+            [
+                "af5b26f19571ecd1",
+                "bb2710673e909a91"
+            ]
+        ]
+    },
+    {
+        "id": "bb2710673e909a91",
+        "type": "function",
+        "z": "3ea11033e0fcf8d6",
+        "name": "Set Schedule",
+        "func": "global.set('schedule', msg.payload);\nnode.warn(\"Acabei de setar o schedule como: \");\nnode.warn(global.get('schedule'));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "359e1caae19beb8b"
+            ]
+        ]
+    },
+    {
+        "id": "af5b26f19571ecd1",
+        "type": "debug",
+        "z": "3ea11033e0fcf8d6",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b559531d16dc69c1",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "3ea11033e0fcf8d6",
+        "name": "",
+        "account": "ca01e37eded74603",
+        "text": "text",
+        "inputtypemessage": "msg",
+        "rejectssl": false,
+        "x": 1000,
+        "y": 320,
+        "wires": [
+            [
+                "7bc8bfae34ea97fc"
+            ]
+        ]
+    },
+    {
+        "id": "359e1caae19beb8b",
+        "type": "function",
+        "z": "3ea11033e0fcf8d6",
+        "name": "Create message",
+        "func": "let text = `Foram configurados novos horários no seu dispositivo: \\n`;\nmsg.payload = global.get(\"schedule\");\nlet n_of_pills = Object.keys(msg.payload).length;\n\nfor (let pill_n = 8 - n_of_pills; pill_n <= 7; pill_n++){\n    text += `\\t Remédio ${pill_n}: ${msg.payload[pill_n].name} \\n`;\n    text += `\\t\\t Tomar ${msg.payload[pill_n].weekday}, ${msg.payload[pill_n].hour}:${msg.payload[pill_n].minute}hrs`;\n}\nmsg.text = text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 300,
+        "wires": [
+            [
+                "3f7c232960b8d59a",
+                "b559531d16dc69c1"
+            ]
+        ]
+    },
+    {
+        "id": "3f7c232960b8d59a",
+        "type": "debug",
+        "z": "3ea11033e0fcf8d6",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "7bc8bfae34ea97fc",
+        "type": "debug",
+        "z": "3ea11033e0fcf8d6",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "47b23403918b70f2",
+        "type": "mqtt in",
+        "z": "3ea11033e0fcf8d6",
+        "name": "SUB horários marcados",
+        "topic": "forget_pill",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "c8dc9f733c6ec8bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 540,
+        "wires": [
+            [
+                "d0f40f8e3bf54298",
+                "5f7c3c6c64d1e695"
+            ]
+        ]
+    },
+    {
+        "id": "d0f40f8e3bf54298",
+        "type": "debug",
+        "z": "3ea11033e0fcf8d6",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "5f7c3c6c64d1e695",
+        "type": "function",
+        "z": "3ea11033e0fcf8d6",
+        "name": "Create forget message",
+        "func": "let schedule = global.get(\"schedule\");\nlet pill_number = parseInt(msg.payload);\nmsg.text = `Ja fazem mais de 30 minutos que o horário do remédio ${schedule[pill_number].name} passou e o remédio não foi tomado`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 540,
+        "wires": [
+            [
+                "839688b3b19384b8"
+            ]
+        ]
+    },
+    {
+        "id": "839688b3b19384b8",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "3ea11033e0fcf8d6",
+        "name": "",
+        "account": "ca01e37eded74603",
+        "text": "text",
+        "inputtypemessage": "msg",
+        "rejectssl": false,
+        "x": 800,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20b4f5bfd7833ddd",
+        "type": "ui_button",
+        "z": "3ea11033e0fcf8d6",
+        "name": "",
+        "group": "cdc337395ab2c801",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Enviar horários para meu whats",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "359e1caae19beb8b"
+            ]
+        ]
+    },
+    {
+        "id": "d0dd1f5abed079ad",
+        "type": "watson-assistant-v2",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "service-endpoint": "https://api.us-south.assistant.watson.cloud.ibm.com/instances/9d00603b-cf15-4674-b7fc-0ac7d5a70f8d",
+        "assistant_id": "f2198dd3-d3c0-42d1-87aa-ccbbcc35b3d0",
+        "debug": false,
+        "restart": false,
+        "return_context": false,
+        "alternate_intents": false,
+        "multisession": false,
+        "timeout": "",
+        "optout-learning": false,
+        "persist-session-id": false,
+        "x": 1290,
+        "y": 1080,
+        "wires": [
+            [
+                "bc1582e72c819245",
+                "7a9ef9ae520b18a9"
+            ]
+        ]
+    },
+    {
+        "id": "be4a58cf62e58f79",
+        "type": "watson-speech-to-text",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "alternatives": 1,
+        "speakerlabels": false,
+        "smartformatting": false,
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "custom-weight": "0.5",
+        "band": "BroadbandModel",
+        "bandhidden": "",
+        "keywords": "",
+        "keywords-threshold": "0.5",
+        "word-confidence": false,
+        "password": "",
+        "apikey": "4XYneadmrB_HKruqO7wqhhbMj4Rcbght_VN_3CGPeZhr",
+        "payload-response": false,
+        "streaming-mode": false,
+        "streaming-mute": true,
+        "auto-connect": false,
+        "discard-listening": false,
+        "disable-precheck": false,
+        "service-endpoint": "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/1ffd798d-da4b-4ce6-9381-3cb88bd31e16",
+        "x": 1380,
+        "y": 680,
+        "wires": [
+            [
+                "ebd10d92d1030f71",
+                "3e5a3d47dd42fe79"
+            ]
+        ]
+    },
+    {
+        "id": "ebd10d92d1030f71",
+        "type": "debug",
+        "z": "15e995525cc0e321",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "transcription",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1700,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d4d3eb134adb36e0",
+        "type": "sox-record",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "buttonStart": "msg",
+        "inputs": 1,
+        "inputSource": "1,0",
+        "manualSource": "",
+        "inputEncoding": "signed-integer",
+        "inputChannels": 1,
+        "inputRate": 16000,
+        "inputBits": 16,
+        "byteOrder": "-L",
+        "encoding": "signed-integer",
+        "channels": 1,
+        "rate": 16000,
+        "bits": 16,
+        "gain": "30",
+        "buffer": "4096",
+        "showDuration": true,
+        "durationType": "limited",
+        "durationLength": "5",
+        "silenceDetection": "nothing",
+        "silenceDuration": "10",
+        "silenceThreshold": "1",
+        "outputFormat": "wav",
+        "manualPath": "/home/jab_rasp/test_audio",
+        "debugOutput": true,
+        "x": 1150,
+        "y": 680,
+        "wires": [
+            [
+                "be4a58cf62e58f79"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9d9212ecbfa31b1e",
+        "type": "wake-word",
+        "z": "15e995525cc0e321",
+        "wakeword": "81f5347c70e612db",
+        "threshold": "0.51",
+        "averaging": true,
+        "inputProp": "payload",
+        "outputProp": "payload",
+        "controlProp": "control",
+        "passthrough": false,
+        "name": "",
+        "x": 500,
+        "y": 700,
+        "wires": [
+            [
+                "0ba4ced5f7027eb3",
+                "bf3059ead5481c82",
+                "f4cd6f11d1ba2f10"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2c25db7d7ff2edfa",
+        "type": "sox-record",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "buttonStart": "msg",
+        "inputs": 1,
+        "inputSource": "1,0",
+        "manualSource": "",
+        "inputEncoding": "signed-integer",
+        "inputChannels": 1,
+        "inputRate": 16000,
+        "inputBits": 16,
+        "byteOrder": "-L",
+        "encoding": "signed-integer",
+        "channels": 1,
+        "rate": 16000,
+        "bits": 16,
+        "gain": "30",
+        "buffer": "4096",
+        "showDuration": false,
+        "durationType": "forever",
+        "durationLength": "0",
+        "silenceDetection": "nothing",
+        "silenceDuration": "2.0",
+        "silenceThreshold": "2.0",
+        "outputFormat": "stream",
+        "manualPath": "/home/jab_rasp/test_audio",
+        "debugOutput": true,
+        "x": 490,
+        "y": 860,
+        "wires": [
+            [
+                "9d9212ecbfa31b1e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0ba4ced5f7027eb3",
+        "type": "function",
+        "z": "15e995525cc0e321",
+        "name": "function 1",
+        "func": "if (msg.payload) {\n    msg.payload = \"start\";\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 680,
+        "wires": [
+            [
+                "9bcc99a7eca82f19",
+                "16711209a39392ad"
+            ]
+        ]
+    },
+    {
+        "id": "bf3059ead5481c82",
+        "type": "function",
+        "z": "15e995525cc0e321",
+        "name": "function 2",
+        "func": "if (msg.payload) {\n    msg.payload = \"stop\";\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 780,
+        "wires": [
+            [
+                "2c25db7d7ff2edfa"
+            ]
+        ]
+    },
+    {
+        "id": "9bcc99a7eca82f19",
+        "type": "delay",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 900,
+        "y": 680,
+        "wires": [
+            [
+                "d4d3eb134adb36e0"
+            ]
+        ]
+    },
+    {
+        "id": "f4cd6f11d1ba2f10",
+        "type": "function",
+        "z": "15e995525cc0e321",
+        "name": "function 3",
+        "func": "if (msg.payload) {\n    msg.payload = \"Como posso ajudar?\";\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 620,
+        "wires": [
+            [
+                "78682e7234385701"
+            ]
+        ]
+    },
+    {
+        "id": "78682e7234385701",
+        "type": "play audio",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "voice": "1",
+        "x": 910,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "0f9d60e2c6229c43",
+        "type": "inject",
+        "z": "15e995525cc0e321",
+        "name": "stop",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "stop",
+        "payloadType": "str",
+        "x": 1130,
+        "y": 580,
+        "wires": [
+            [
+                "d4d3eb134adb36e0"
+            ]
+        ]
+    },
+    {
+        "id": "3e5a3d47dd42fe79",
+        "type": "function",
+        "z": "15e995525cc0e321",
+        "name": "transcription_to_payload",
+        "func": "msg.payload = msg.transcription\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 860,
+        "wires": [
+            [
+                "d0dd1f5abed079ad"
+            ]
+        ]
+    },
+    {
+        "id": "bc1582e72c819245",
+        "type": "function",
+        "z": "15e995525cc0e321",
+        "name": "intent",
+        "func": "if(msg.payload = msg.payload.output.intents[0].intent == \"horarios\"){\n    msg.payload = \"Enviarei os horários que estão configurados no seu número de telefone. Caso não tenha um número cadastrado, os horários podem ser consultados no seu aplicativo\"\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 1040,
+        "wires": [
+            [
+                "307b134753b3210e",
+                "fc32239095952923",
+                "b2e17bc9e21e524d"
+            ]
+        ]
+    },
+    {
+        "id": "16711209a39392ad",
+        "type": "delay",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "20",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 940,
+        "y": 780,
+        "wires": [
+            [
+                "99e945baa9ea34b1"
+            ]
+        ]
+    },
+    {
+        "id": "7a9ef9ae520b18a9",
+        "type": "debug",
+        "z": "15e995525cc0e321",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "307b134753b3210e",
+        "type": "debug",
+        "z": "15e995525cc0e321",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1740,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "fc32239095952923",
+        "type": "play audio",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "voice": "1",
+        "x": 1770,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "a81b0eb8ccdce161",
+        "type": "node-red-contrib-whatsapp-cmb-send-message",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "account": "ca01e37eded74603",
+        "text": "text",
+        "inputtypemessage": "msg",
+        "rejectssl": false,
+        "x": 2020,
+        "y": 1060,
+        "wires": [
+            [
+                "7d458f0de7e143fd"
+            ]
+        ]
+    },
+    {
+        "id": "b2e17bc9e21e524d",
+        "type": "function",
+        "z": "15e995525cc0e321",
+        "name": "Create message",
+        "func": "let schedule = global.get('schedule');\nlet text = `Foram configurados novos horários no seu dispositivo: \\n`;\nlet n_of_pills = Object.keys(schedule).length;\n\nfor (let pill_n = 8 - n_of_pills; pill_n <= 7; pill_n++){\n    text += `\\t Remédio ${pill_n}: ${schedule[pill_n].name} \\n`;\n    text += `\\t\\t Tomar ${schedule[pill_n].weekday}, ${schedule[pill_n].hour}:${schedule[pill_n].minute}hrs`;\n}\nmsg.text = text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1740,
+        "y": 1060,
+        "wires": [
+            [
+                "a81b0eb8ccdce161",
+                "1307f2985f7cb878"
+            ]
+        ]
+    },
+    {
+        "id": "1307f2985f7cb878",
+        "type": "debug",
+        "z": "15e995525cc0e321",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2020,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "7d458f0de7e143fd",
+        "type": "debug",
+        "z": "15e995525cc0e321",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2300,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "e1b0f3f93568e394",
+        "type": "ui_switch",
+        "z": "15e995525cc0e321",
+        "name": "",
+        "label": "Ativar assistente Virtual",
+        "tooltip": "",
+        "group": "cdc337395ab2c801",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 820,
+        "wires": [
+            [
+                "2c25db7d7ff2edfa",
+                "d3f4ea218cd6caea"
+            ]
+        ]
+    },
+    {
+        "id": "d3f4ea218cd6caea",
+        "type": "debug",
+        "z": "15e995525cc0e321",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "26bc70d5174e3354",
+        "type": "watson-conversation-v1",
+        "z": "495f62aa5d3bdc4c",
+        "name": "",
+        "workspaceid": "97ea5d74-a330-406d-a4ff-8c3a77e5120e",
+        "multiuser": false,
+        "context": false,
+        "empty-payload": false,
+        "service-endpoint": "https://api.us-south.assistant.watson.cloud.ibm.com/instances/3e1840e7-d751-42b9-946d-b7052fe0bf36",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 300,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "70783229d3837e16",
+        "type": "watson-conversation-v1-workspace-manager",
+        "z": "495f62aa5d3bdc4c",
+        "name": "",
+        "cwm-custom-mode": "createWorkspace",
+        "cwm-workspace-id": "28911afa-9081-4571-b7ab-958464ae01f0",
+        "cwm-intent": "",
+        "cwm-example": "",
+        "cwm-entity": "",
+        "cwm-entity-value": "",
+        "cwm-dialog-node": "",
+        "cwm-export-content": false,
+        "cwm-service-endpoint": "https://api.us-south.assistant.watson.cloud.ibm.com/instances/3e1840e7-d751-42b9-946d-b7052fe0bf36",
+        "x": 310,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f045aa29233bf2c4",
+        "type": "inject",
+        "z": "495f62aa5d3bdc4c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ligue a lämpada do quarto",
+        "payloadType": "str",
+        "x": 110,
+        "y": 300,
+        "wires": [
+            [
+                "26bc70d5174e3354"
+            ]
+        ]
+    },
+    {
+        "id": "9eb4b32af8b70b08",
+        "type": "inject",
+        "z": "495f62aa5d3bdc4c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"intents\": [     {       \"intent\": \"desligue\",       \"examples\": [         {           \"text\": \"apagar\"         },         {           \"text\": \"apague\"         },         {           \"text\": \"delsigue\"         },         {           \"text\": \"desligar\"         }       ],       \"description\": \"apague\"     },     {       \"intent\": \"ligue\",       \"examples\": [         {           \"text\": \"acenda\"         },         {           \"text\": \"acender\"         },         {           \"text\": \"ligar\"         },         {           \"text\": \"ligue\"         }       ],       \"description\": \"\"     }   ],   \"entities\": [     {       \"entity\": \"dispositivo\",       \"values\": [         {           \"type\": \"synonyms\",           \"value\": \"aquecedor\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"lâmpada\",           \"synonyms\": [             \"luz\"           ]         },         {           \"type\": \"synonyms\",           \"value\": \"ventilador\",           \"synonyms\": []         }       ],       \"fuzzy_match\": true     },     {       \"entity\": \"localização\",       \"values\": [         {           \"type\": \"synonyms\",           \"value\": \"área de serviço\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"banheiro\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"cozinha\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"garagem\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"jardim\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"quarto\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"quarto de hóspedes\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"sala\",           \"synonyms\": []         },         {           \"type\": \"synonyms\",           \"value\": \"varanda\",           \"synonyms\": []         }       ],       \"fuzzy_match\": true     },     {       \"entity\": \"sys-currency\",       \"values\": []     },     {       \"entity\": \"sys-date\",       \"values\": []     },     {       \"entity\": \"sys-number\",       \"values\": []     },     {       \"entity\": \"sys-percentage\",       \"values\": []     },     {       \"entity\": \"sys-time\",       \"values\": []     }   ],   \"metadata\": {     \"api_version\": {       \"major_version\": \"v2\",       \"minor_version\": \"2018-11-08\"     }   },   \"dialog_nodes\": [     {       \"type\": \"standard\",       \"title\": \"Em outros casos\",       \"output\": {         \"generic\": [           {             \"values\": [],             \"response_type\": \"text\",             \"selection_policy\": \"sequential\"           }         ]       },       \"conditions\": \"anything_else\",       \"dialog_node\": \"Em outros casos\",       \"disambiguation_opt_out\": true     }   ],   \"counterexamples\": [],   \"system_settings\": {     \"disambiguation\": {       \"prompt\": \"Você quis dizer:\",       \"enabled\": true,       \"randomize\": true,       \"max_suggestions\": 5,       \"suggestion_text_policy\": \"title\",       \"none_of_the_above_prompt\": \"Nenhuma das anteriores\"     },     \"human_agent_assist\": {       \"prompt\": \"Você quis dizer:\"     },     \"intent_classification\": {       \"training_backend_version\": \"v2\"     }   },   \"learning_opt_out\": false,   \"name\": \"teste-pt-dialog\",   \"language\": \"pt-br\",   \"description\": \"\" }",
+        "payloadType": "json",
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "70783229d3837e16"
+            ]
+        ]
+    }
+]

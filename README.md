@@ -10,6 +10,12 @@
 
 O aplicativo foi feito com o [MIT app Inventor](https://appinventor.mit.edu/) e seu apk pode ser encontrado no repositório
 
+# Organização do Repositório
+
+- A pasta project contém o arquivo de programação da ESP em arduino IDE
+- O project_iot.apk é o aplicativo para celular que configura os horários dos remédios
+- E o arquivo flows.json contém o flow do node red que roda na raspberry pi
+
 # Especificações
 
 Para o projeto foram utilizados os seguintes componentes:
